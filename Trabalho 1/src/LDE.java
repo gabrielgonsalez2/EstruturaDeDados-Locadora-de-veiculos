@@ -1,5 +1,5 @@
 
-public class LDE implements Lista{
+public class LDE{
     private Noh inicio;
     private Noh ultimo;
 
