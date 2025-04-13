@@ -1,12 +1,20 @@
 public class Categoria {
     private String nome;
     private int identificador;
+    LDE listaVeiculosNaCategoria;
 
     public Categoria(String nome, int identificador) {
         this.nome = nome;
         this.identificador = identificador;
+        this.listaVeiculosNaCategoria = new LDE();
+
     }
 
+    //Lista os veiculos vinculados a categoria
+    public void listarVeiculos(){
+        this.listaVeiculosNaCategoria.imprimeLista();
+    }
+    
     public void incluirCategoria(Categoria cat){
 
     }

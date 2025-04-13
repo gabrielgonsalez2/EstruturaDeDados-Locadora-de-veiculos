@@ -5,7 +5,7 @@ public class Veiculos {
     private final int ano;
     private int potencia;
     private final int numeroLugares;
-    private Categoria categoria;
+    private final Categoria categoria;
 
     public Veiculos(String placa, String modelo, String marca, int ano, int potencia, int numeroLugares, Categoria categoria) {
         this.placa = placa;
@@ -15,21 +15,23 @@ public class Veiculos {
         this.potencia = potencia;
         this.numeroLugares = numeroLugares;
         this.categoria = categoria;
+        //adiciona o veiculo recem criado na lista da categoria
+        this.categoria.listaVeiculosNaCategoria.insereInicio(this);
     }
 
-    public void incluirVeiculo(Categoria cat){
-
-    }
-
-    public void editarVeiculo(Categoria cat){
-
-    }
-
-    public void excluirVeiculo(Categoria cat){
+    public void incluirVeiculo(Veiculos veiculo){
 
     }
 
-    public void listarVeiculo(Categoria cat){
+    public void editarVeiculo(Veiculos veiculo){
+
+    }
+
+    public void excluirVeiculo(Veiculos veiculo){
+
+    }
+
+    public void listarVeiculo(Veiculos veiculo){
 
     }
 
