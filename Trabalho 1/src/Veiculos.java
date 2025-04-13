@@ -29,7 +29,7 @@ public class Veiculos {
         System.out.print("Digite a placa: ");
         String placa = scanner.nextLine();
 
-        if (listaVeiculos.procurarPorPlaca(placa) != null) {
+        if (listaVeiculos.procurarPorPlaca(placa) == null) {
 
             System.out.print("Digite o modelo: ");
             String modelo = scanner.nextLine();
@@ -70,24 +70,28 @@ public class Veiculos {
         String placa = scanner.nextLine();
 
         Veiculos veiculo = listaVeiculos.procurarPorPlaca(placa);
+        if (veiculo == null) {
+            System.out.println("Veículo não encontrado.");
+            return;
+        }
         System.out.println(veiculo);
 
-        System.out.print("Digite a placa: ");
+        System.out.print("Digite a nova placa: ");
         veiculo.placa = scanner.nextLine();
 
-        System.out.print("Digite o modelo: ");
+        System.out.print("Digite o novo modelo: ");
         veiculo.modelo = scanner.nextLine();
 
-        System.out.print("Digite a marca: ");
+        System.out.print("Digite a nova marca: ");
         veiculo.marca = scanner.nextLine();
 
-        System.out.print("Digite o ano: ");
+        System.out.print("Digite o novo ano: ");
         veiculo.ano = Integer.parseInt(scanner.nextLine());
 
-        System.out.print("Digite a potência: ");
+        System.out.print("Digite a nova potência: ");
         veiculo.potencia = Integer.parseInt(scanner.nextLine());
 
-        System.out.print("Digite o número de lugares: ");
+        System.out.print("Digite o novo número de lugares: ");
         veiculo.numeroLugares = Integer.parseInt(scanner.nextLine());
 
         Categoria.listarCategoria();
@@ -108,10 +112,15 @@ public class Veiculos {
         Scanner scanner = new Scanner(System.in);
 
         listarVeiculos();
-        System.out.print("Digite a placa do veiculo que deseja editar: ");
+        System.out.print("Digite a placa do veiculo que deseja excluir: ");
         String placa = scanner.nextLine();
 
         Veiculos veiculo = listaVeiculos.procurarPorPlaca(placa);
+        if (veiculo == null) {
+            System.out.println("Veículo não encontrado.");
+            return;
+        }
+
         listaVeiculos.imprimeLista();
         System.out.println("Certeza que deseja excluir? (s/n)");
         String escolha = scanner.nextLine();

@@ -28,19 +28,57 @@ public class Categoria {
 
         System.out.print("Digite o nome da categoria: ");
         String nome = scanner.nextLine();
+        if (listaCategoria.procurarPorNome(nome) == null) {
+            Categoria categoria = new Categoria(nome);
 
-        Categoria categoria = new Categoria(nome);
+            System.out.println("Categoria incluida com sucesso!");
+        } else{
+            System.out.println("Esta categoria já existe");
+        }
+    }
+
+    public static void editarCategoria(){
+        Scanner scanner = new Scanner(System.in);
+        listarCategoria();
+
+        System.out.print("Digite o id da categoria que deseja editar: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        Categoria categoria = listaCategoria.procurarPorId(id);
+
+        if (categoria == null) {
+            System.out.println("Categoria não encontrada.");
+            return;
+        }
+
+        System.out.print("Digite o novo nome da categoria: ");
+        categoria.nome = scanner.nextLine();
 
         System.out.println("Categoria incluida com sucesso!");
-    }
-
-    public void editarCategoria(Categoria cat){
 
     }
 
-    public void excluirCategoria(Categoria cat){
+    public static void excluirCategoria(){
+        Scanner scanner = new Scanner(System.in);
 
+        listarCategoria();
+        System.out.print("Digite o id da categoria que deseja excluir: ");
+        int id = Integer.parseInt(scanner.nextLine());
+
+        Categoria categoria = listaCategoria.procurarPorId(id);
+
+        if (categoria == null) {
+            System.out.println("Categoria não encontrada.");
+            return;
+        }
+
+        System.out.println("Certeza que deseja excluir? (s/n)");
+        String escolha = scanner.nextLine();
+        if (escolha.equals("s")) {
+            System.out.println(categoria.getNome() + "foi excluido com sucesso!");
+            listaCategoria.remove(categoria);
+        }
     }
+
 
     public static void listarCategoria(){
         listaCategoria.imprimeLista();

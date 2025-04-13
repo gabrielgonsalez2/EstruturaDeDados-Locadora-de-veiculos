@@ -105,6 +105,21 @@ public class LDE{
         return null;
     }
 
+    public Categoria procurarPorNome(String nome) {
+        Noh atual = inicio;
+        while (atual != null) {
+            Object obj = atual.getInfo();
+            if (obj instanceof Categoria) {
+                Categoria categoria = (Categoria) obj;
+                if (categoria.getNome().equals(nome)) {
+                    return categoria;
+                }
+            }
+            atual = atual.getProx();
+        }
+        return null;
+    }
+
 
     public void imprimeLista(){
         Noh novo = inicio;

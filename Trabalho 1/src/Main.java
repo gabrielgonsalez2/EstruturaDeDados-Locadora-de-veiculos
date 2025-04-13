@@ -14,6 +14,10 @@ public class Main {
         Veiculos.incluirVeiculo();
         Veiculos.editarVeiculo();
         Veiculos.excluirVeiculo();
+
+        Categoria.editarCategoria();
+        Categoria.excluirCategoria();
+
         Categoria.listarCategoria();
 
         Veiculos.listarVeiculos();
