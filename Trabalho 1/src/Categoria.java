@@ -36,4 +36,32 @@ public class Categoria {
         this.identificador = identificador;
     }
 
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "nome= '" + nome + '\'' +
+                ", identificador= '" + identificador+ '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object outro) {
+        //qualquer coisa é diferente de NULL
+        if (outro == null) {
+            return false;
+        }
+        //propriedade REFLEXIVA
+        if (this == outro) {
+            return true;
+        }
+        //objetos de classes diferentes nunca são iguais
+        if (this.getClass() != outro.getClass()) {
+            return false;
+        }
+        //conversão explícita para acessar os atributos do outro
+        Categoria outraCategoria = (Categoria) outro;
+        //verifica se todos os atributos são iguais
+        return this.nome.equals(outraCategoria.nome)
+                && this.identificador == outraCategoria.identificador;
+    }
 }
