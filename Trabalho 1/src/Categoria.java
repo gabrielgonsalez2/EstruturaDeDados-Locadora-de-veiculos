@@ -1,12 +1,16 @@
+import java.util.Scanner;
+
 public class Categoria {
     private String nome;
     private int identificador;
     LDE listaVeiculosNaCategoria;
+    private static LDE listaCategoria = new LDE();
 
-    public Categoria(String nome, int identificador) {
+    public Categoria(String nome) {
         this.nome = nome;
-        this.identificador = identificador;
+        this.identificador = listaCategoria.tamanho() + 1;
         this.listaVeiculosNaCategoria = new LDE();
+        listaCategoria.insereFim(this);
 
     }
 
@@ -14,9 +18,20 @@ public class Categoria {
     public void listarVeiculos(){
         this.listaVeiculosNaCategoria.imprimeLista();
     }
-    
-    public void incluirCategoria(Categoria cat){
 
+    public static Categoria procurarCategoria(int id){
+        return (Categoria) listaCategoria.procurarPorId(id);
+    }
+
+    public static void incluirCategoria(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o nome da categoria: ");
+        String nome = scanner.nextLine();
+
+        Categoria categoria = new Categoria(nome);
+
+        System.out.println("Categoria incluida com sucesso!");
     }
 
     public void editarCategoria(Categoria cat){
@@ -27,8 +42,8 @@ public class Categoria {
 
     }
 
-    public void listarCategoria(Categoria cat){
-
+    public static void listarCategoria(){
+        listaCategoria.imprimeLista();
     }
 
     public String getNome() {

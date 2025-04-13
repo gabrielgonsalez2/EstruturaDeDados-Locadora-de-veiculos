@@ -75,6 +75,37 @@ public class LDE{
         return tamanho;
     }
 
+    public Categoria procurarPorId(int identificador) {
+        Noh atual = inicio;
+        while (atual != null) {
+            Object obj = atual.getInfo();
+            if (obj instanceof Categoria) {
+                Categoria categoria = (Categoria) obj;
+                if (categoria.getIdentificador() == identificador) {
+                    return categoria;
+                }
+            }
+            atual = atual.getProx();
+        }
+        return null;
+    }
+
+    public Veiculos procurarPorPlaca(String identificador) {
+        Noh atual = inicio;
+        while (atual != null) {
+            Object obj = atual.getInfo();
+            if (obj instanceof Veiculos) {
+                Veiculos veiculo = (Veiculos) obj;
+                if (veiculo.getPlaca().equals(identificador)) {
+                    return veiculo;
+                }
+            }
+            atual = atual.getProx();
+        }
+        return null;
+    }
+
+
     public void imprimeLista(){
         Noh novo = inicio;
         while (novo != null) {
