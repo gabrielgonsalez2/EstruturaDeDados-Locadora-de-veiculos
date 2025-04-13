@@ -9,17 +9,12 @@ public class Main {
         listaCategorias.insereInicio(esportivo);
         listaCategorias.insereInicio(offRoad);
         Categoria.incluirCategoria();
-
-
         Veiculos.incluirVeiculo();
         Veiculos.editarVeiculo();
         Veiculos.excluirVeiculo();
-
         Categoria.editarCategoria();
         Categoria.excluirCategoria();
-
         Categoria.listarCategoria();
-
         Veiculos.listarVeiculos();
     }
 }
