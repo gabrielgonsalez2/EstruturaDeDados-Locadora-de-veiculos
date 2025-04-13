@@ -10,6 +10,20 @@ public Cliente(String nome, String cpf, String cnh, String telefone) {
     this.cnh = cnh;
     this.telefone = telefone;
     }
+
+    public static void cadastrarCliente() {
+
+    }
+
+    public static void editarCliente() {
+
+    }
+    
+    public static void removerCliente() {
+
+    }
+
+
     public String getNome() {
         return nome;
     }

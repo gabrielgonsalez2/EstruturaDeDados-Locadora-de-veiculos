@@ -17,13 +17,13 @@ public class MenuCliente {
 
             switch (opcao) {
                 case 1: 
-                cadastrarCliente(listaClientes);
+                Cliente.cadastrarCliente();
                 case 2:
                 listaClientes.imprimeLista();
                 case 3: 
-                editarCliente(listaClientes);
+                Cliente.editarCliente();
                 case 4:
-                removerCliente(listaClientes);
+                Cliente.removerCliente();
                 case 0:
                 System.out.println("Voltando...");
                 default:
