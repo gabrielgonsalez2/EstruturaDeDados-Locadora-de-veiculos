@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         LDE listaVeiculos = new LDE();
+        LDE listaClientes = new LDE();
         LDE listaCategorias = new LDE();
         Categoria esportivo = new Categoria("Esportivo");
         Categoria offRoad = new Categoria("Off Road");
@@ -16,6 +17,7 @@ public class Main {
         Categoria.excluirCategoria();
         Categoria.listarCategoria();
         Veiculos.listarVeiculos();
+        MenuCliente.exibirMenu(listaClientes);
     }
 }
 
