@@ -16,7 +16,7 @@ public class MenuCliente {
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
             sc.nextLine(); // Consumir quebra de linha
-
+        
             switch (opcao) {
                 case 1:
                     Cliente.cadastrarCliente(listaClientes);

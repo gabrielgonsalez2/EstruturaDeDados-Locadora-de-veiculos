@@ -1,10 +1,7 @@
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
         // Inicializar listas
         LDE listaVeiculos = new LDE();
-        LDE listaClientes = new LDE();
         LDE listaCategorias = new LDE();
         LDE listaClientes = new LDE();
 
@@ -23,5 +20,19 @@ public class Main {
         Categoria.excluirCategoria();
         Categoria.listarCategoria();
         Veiculos.listarVeiculos();
+
+        //menu principal
+        // int opcao;
+        // do {
+        //     System.out.println("\n========= Sistema Locadora =========");
+        //     System.out.println("1 - Gerenciar Clientes");
+        //     System.out.println("2 - Gerenciar Veículos");
+        //     System.out.println("3 - Gerenciar Categorias");
+        //     System.out.println("0 - Sair");
+        //     System.out.print("Escolha uma opção: ");
+        //     opcao = sc.nextInt();
+        //     sc.nextLine(); // Limpar quebra de linha
+
+           
     }
 }

@@ -48,7 +48,7 @@ public Cliente(String nome, String cpf, String cnh, String telefone) {
                 System.out.println("Cliente não encontrado.");
             }
         }
-    }
+   
     
     public void removerCliente(LDE listaClientes) {
         Scanner sc = new Scanner(System.in);
@@ -113,3 +113,4 @@ public Cliente(String nome, String cpf, String cnh, String telefone) {
                 ", telefone='" + telefone + '\'' +
                 '}';
     }
+ }
