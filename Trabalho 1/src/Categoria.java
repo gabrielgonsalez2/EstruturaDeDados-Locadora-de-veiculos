@@ -6,9 +6,9 @@ public class Categoria {
     LDE listaVeiculosNaCategoria;
     private static LDE listaCategoria = new LDE();
 
-    public Categoria(String nome) {
+    public Categoria(String nome, int identificador) {
         this.nome = nome;
-        this.identificador = listaCategoria.tamanho() + 1;
+        this.identificador = identificador;
         this.listaVeiculosNaCategoria = new LDE();
         listaCategoria.insereFim(this);
 
@@ -28,12 +28,18 @@ public class Categoria {
 
         System.out.print("Digite o nome da categoria: ");
         String nome = scanner.nextLine();
-        if (listaCategoria.procurarPorNome(nome) == null) {
-            Categoria categoria = new Categoria(nome);
+        if (listaCategoria.procurarPorNome(nome) == null){
+            System.out.print("Digite o identificador da categoria: ");
+            int identificador = scanner.nextInt();
+            if (listaCategoria.procurarPorId(identificador) == null) {
+                Categoria categoria = new Categoria(nome, identificador);
 
-            System.out.println("Categoria incluida com sucesso!");
+                System.out.println("Categoria incluida com sucesso!");
+            } else{
+                System.out.println("Esta categoria já existe");
+            }
         } else{
-            System.out.println("Esta categoria já existe");
+            System.out.println("Já existe uma categoria com este identificador");
         }
     }
 
@@ -52,8 +58,10 @@ public class Categoria {
 
         System.out.print("Digite o novo nome da categoria: ");
         categoria.nome = scanner.nextLine();
+        System.out.print("Digite o novo identificador da categoria: ");
+        categoria.identificador = scanner.nextInt();
 
-        System.out.println("Categoria incluida com sucesso!");
+        System.out.println("Categoria atualizada com sucesso!");
 
     }
 

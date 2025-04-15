@@ -167,6 +167,10 @@ public class Veiculos {
         return numeroLugares;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
     @Override
     public String toString() {
         return "Veiculo{" +
