@@ -15,23 +15,23 @@ public class MenuCliente {
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
-            sc.nextLine(); // Consumir quebra de linha
+            sc.nextLine(); 
         
             switch (opcao) {
                 case 1:
-                    Cliente.cadastrarCliente(listaClientes);
+                    ControleCliente.cadastrarCliente(listaClientes);
                     break;
                 case 2:
-                    listaClientes.imprimeLista();
+                    ControleCliente.listarClientesInicio(listaClientes);
                     break;
                 case 3:
-                    Cliente.editarCliente(listaClientes);
+                    ControleCliente.editarCliente(listaClientes);
                     break;
                 case 4:
-                    Cliente.removerCliente(listaClientes);
+                    ControleCliente.removerCliente(listaClientes);
                     break;
                 case 5:
-                    listaClientes.imprimeReverso();
+                    ControleCliente.listarClientesFim(listaClientes);
                     break;
                 case 0:
                     System.out.println("Voltando...");
