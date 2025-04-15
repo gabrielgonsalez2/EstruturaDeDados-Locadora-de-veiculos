@@ -150,4 +150,11 @@ public class LDE{
             p = p.getAnt();
         }
     }
+
+    public Noh getInicio(){
+        return inicio;
+    }
+    public Noh getUltimo(){
+        return ultimo;
+    }
 }
