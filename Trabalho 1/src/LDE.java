@@ -128,7 +128,21 @@ public class LDE{
             novo = novo.getProx();
         }
     }
-
+    
+    public Cliente procurarPorCnh(String cnh) {
+        Noh atual = inicio;
+        while (atual != null) {
+            Object obj = atual.getInfo();
+            if (obj instanceof Cliente) {
+                Cliente cliente = (Cliente) obj;
+                if (cliente.getCnh().equals(cnh)) {
+                    return cliente;
+                }
+            }
+            atual = atual.getProx();
+        }
+        return null;
+    }
     public void imprimeReverso() {
         Noh p = ultimo;
         while (p != null) {
