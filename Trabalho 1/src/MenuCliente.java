@@ -19,19 +19,19 @@ public class MenuCliente {
         
             switch (opcao) {
                 case 1:
-                    ControleCliente.cadastrarCliente(listaClientes);
+                    Cliente.cadastrarCliente(listaClientes);
                     break;
                 case 2:
-                    ControleCliente.listarClientesInicio(listaClientes);
+                    Cliente.listarClientesInicio(listaClientes);
                     break;
                 case 3:
-                    ControleCliente.editarCliente(listaClientes);
+                    Cliente.editarCliente(listaClientes);
                     break;
                 case 4:
-                    ControleCliente.removerCliente(listaClientes);
+                    Cliente.removerCliente(listaClientes);
                     break;
                 case 5:
-                    ControleCliente.listarClientesFim(listaClientes);
+                    Cliente.listarClientesFim(listaClientes);
                     break;
                 case 0:
                     System.out.println("Voltando...");
