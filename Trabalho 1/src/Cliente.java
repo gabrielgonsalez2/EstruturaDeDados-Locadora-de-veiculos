@@ -5,11 +5,13 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Cliente {
+    // Atributos do cliente
     private String nome;
     private String cpf;
     private String cnh;
     private String telefone;
 
+    // Esta lista guarda todos os clientes cadastrados
     public static LDE listaClientes = new LDE(); 
 
     public Cliente(String nome, String cpf, String cnh, String telefone) {
@@ -19,7 +21,7 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    // Métodos 
+    // Método para cadastrar um novo cliente
     public static void cadastrarCliente(LDE listaClientes) {
         Scanner sc = new Scanner(System.in);
 
@@ -46,6 +48,7 @@ public class Cliente {
         System.out.println("Cliente cadastrado com sucesso!");
     }
 
+    // Método para editar um cliente existente
     public static void editarCliente(LDE listaClientes) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Digite o CPF do cliente que deseja editar: ");
@@ -70,6 +73,7 @@ public class Cliente {
         System.out.println("Dados atualizados com sucesso!");
     }
 
+    // Método para remover um cliente
     public static void removerCliente(LDE listaClientes) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Digite o CPF do cliente a ser removido: ");
@@ -93,6 +97,7 @@ public class Cliente {
         }
     }
 
+    // Método para buscar um cliente pelo CPF
     public static Cliente buscarPorCpf(LDE lista, String cpf) {
         if (lista == null || cpf == null) return null;
 
@@ -110,6 +115,7 @@ public class Cliente {
         return null;
     }
 
+    // Método para listar todos os clientes no inicio ao fim
     public static void listarClientesInicio(LDE listaClientes) {
         System.out.println("\n====== LISTA DE CLIENTES (Início ao Fim) ======");
         if (listaClientes.getInicio() == null) {
@@ -118,7 +124,7 @@ public class Cliente {
         listaClientes.imprimeLista();
         }
     }
-
+    // Método para listar todos os clientes no fim ao inicio
     public static void listarClientesFim(LDE listaClientes) {
         System.out.println("\n====== LISTA DE CLIENTES (Fim ao Início) ======");
         if (listaClientes.getInicio() == null) {
@@ -154,6 +160,7 @@ public class Cliente {
             this.telefone = telefone;
     }
 
+    // Método para carregar clientes de um arquivo CSV
 public static void carregarClientesCSV(String caminhoArquivo) {
     try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
         String linha;
