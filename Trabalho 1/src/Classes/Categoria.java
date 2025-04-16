@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import Classes.Categoria;
 import Utils.LDE;
 import Utils.Noh;
 

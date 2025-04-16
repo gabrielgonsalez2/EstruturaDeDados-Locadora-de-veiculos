@@ -8,8 +8,6 @@ import java.util.Scanner;
 import Utils.LDE;
 import Utils.Noh;
 
-
-
 public class Cliente {
     // Atributos do cliente
     private String nome;

@@ -84,10 +84,17 @@ public class Veiculos {
             return;
         }
 
+
         System.out.println(veiculo);
 
         System.out.print("Digite a nova placa: ");
-        veiculo.placa = scanner.nextLine();
+        String novaPlaca = scanner.nextLine();
+        if (listaVeiculos.procurarPorPlaca(novaPlaca) == null) {
+            veiculo.placa = novaPlaca;
+        } else {
+            System.out.println("Ja existe um veiculo com este placa.");
+            return;
+        }
 
         System.out.print("Digite o novo modelo: ");
         veiculo.modelo = scanner.nextLine();

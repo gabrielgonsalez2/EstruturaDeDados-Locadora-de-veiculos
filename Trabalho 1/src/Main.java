@@ -1,5 +1,10 @@
-import java.util.Scanner;
+/**
+ * @author Gabriel Gonsalez
+ * @author Lucie Grillo
+ * @author Graziela Espindola
+ */
 
+import java.util.Scanner;
 import Classes.Categoria;
 import Classes.Cliente;
 import Classes.ListaLocacoes;
@@ -13,7 +18,7 @@ public class Main {
         // Inicializar listas principais do sistema
         ListaLocacoes listaLocacoes = new ListaLocacoes();
 
-        // Carregar dados de arquivos CSV na ordem correta
+        // Carregar dados de arquivos CSV na ordem correta.
         Categoria.carregarCategoriasCSV("src/Data/Categorias.csv");
         Veiculos.carregarVeiculosCSV("src/Data/veiculos.csv");
         Cliente.carregarClientesCSV("src/Data/clientes.csv");
