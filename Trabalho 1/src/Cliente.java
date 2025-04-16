@@ -193,7 +193,7 @@ public static void carregarClientesCSV(String caminhoArquivo) {
 }
     // Método para salvar clientes de um arquivo CSV
    public static void salvarClientesCSV(String caminhoArquivo) {
-    try (PrintWriter writer = new PrintWriter("clientes.csv")) {
+    try (PrintWriter writer = new PrintWriter(caminhoArquivo)) {
         writer.println("nome;cpf;cnh;telefone");
         Noh atual = listaClientes.getInicio();
         while (atual != null) {
