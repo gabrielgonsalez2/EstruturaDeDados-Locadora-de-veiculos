@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Veiculos {
@@ -6,17 +10,17 @@ public class Veiculos {
     private String marca;
     private int ano;
     private int potencia;
-    private int numeroLugares;
+    private int lugares;
     private Categoria categoria;
     private static LDE listaVeiculos = new LDE();
 
-    public Veiculos(String placa, String modelo, String marca, int ano, int potencia, int numeroLugares, Categoria categoria) {
+    public Veiculos(String placa, String modelo, String marca, int ano, int potencia, int lugares, Categoria categoria) {
         this.placa = placa;
         this.modelo = modelo;
         this.marca = marca;
         this.ano = ano;
         this.potencia = potencia;
-        this.numeroLugares = numeroLugares;
+        this.lugares = lugares;
         this.categoria = categoria;
         //adiciona o veiculo recem criado na lista da categoria
         this.categoria.listaVeiculosNaCategoria.insereFim(this);
@@ -47,7 +51,7 @@ public class Veiculos {
             int numeroLugares = Integer.parseInt(scanner.nextLine());
 
             Categoria.listarCategoria();
-            System.out.print("Digite o nome da categoria: ");
+            System.out.print("Digite o id da categoria: ");
             int identificadorCategoria = Integer.parseInt(scanner.nextLine());
 
             Categoria categoria = Categoria.procurarCategoria(identificadorCategoria);
@@ -92,7 +96,7 @@ public class Veiculos {
         veiculo.potencia = Integer.parseInt(scanner.nextLine());
 
         System.out.print("Digite o novo número de lugares: ");
-        veiculo.numeroLugares = Integer.parseInt(scanner.nextLine());
+        veiculo.lugares = Integer.parseInt(scanner.nextLine());
 
         Categoria.listarCategoria();
         System.out.print("Digite o nome da categoria: ");
@@ -163,12 +167,73 @@ public class Veiculos {
         this.potencia = potencia;
     }
 
-    public int getNumeroLugares() {
-        return numeroLugares;
+    public int getLugares() {
+        return lugares;
     }
 
     public Categoria getCategoria() {
         return categoria;
+    }
+
+    public static void carregarVeiculosCSV(String caminhoArquivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            boolean primeiraLinha = true;
+
+            while ((linha = br.readLine()) != null) {
+                // Ignora a primeira linha se for cabeçalho
+                if (primeiraLinha) {
+                    primeiraLinha = false;
+                    continue;
+                }
+//placa;modelo;marca;ano;potencia;lugares;categoria
+                String[] dados = linha.split(";");
+                if (dados.length != 7) {
+                    System.out.println("Linha inválida: " + linha);
+                    continue;
+                }
+
+                String placa = dados[0].trim();
+                String modelo = dados[1].trim();
+                String marca = dados[2].trim();
+                int ano = Integer.parseInt(dados[3].trim());
+                int potencia = Integer.parseInt(dados[4].trim());
+                int lugares = Integer.parseInt(dados[5].trim());
+                Categoria categoria = Categoria.procurarCategoria(Integer.parseInt(dados[6].trim()));
+
+
+                if (listaVeiculos.procurarPorPlaca(placa) == null) {
+
+                    Veiculos veiculo = new Veiculos(placa, modelo, marca, ano, potencia, lugares, categoria);
+                    System.out.println("Veiculo carregado: " + placa);
+                } else {
+                    System.out.println("Veiculo já existente: " + placa);
+                }
+            }
+
+            System.out.println("Carregamento de categorias finalizado.");
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+        }
+    }
+
+    public static void salvarVeiculosCSV(String caminhoArquivo) {
+        try (PrintWriter writer = new PrintWriter(caminhoArquivo)) {
+            // Cabeçalho
+            writer.println("placa;modelo;marca;ano;potencia;lugares;categoria");
+
+            // Percorrer a lista de categorias e salvar
+            Noh atual = listaVeiculos.getInicio();
+            while (atual != null) {
+                Veiculos veiculo = (Veiculos) atual.getInfo();
+                writer.println(veiculo.getPlaca() + ";" + veiculo.getModelo() + ";" + veiculo.getMarca() + ";" + veiculo.getAno()+ ";" + veiculo.getPotencia()+ ";" + veiculo.getLugares() + ";" + veiculo.categoria.getIdentificador());
+                atual = atual.getProx();
+            }
+
+            System.out.println("Veiculos salvas com sucesso em: " + caminhoArquivo);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar veiculos: " + e.getMessage());
+        }
     }
 
     @Override
@@ -179,7 +244,7 @@ public class Veiculos {
                 ", marca='" + marca + '\'' +
                 ", ano='" + ano + '\'' +
                 ", potencia='" + potencia + '\'' +
-                ", número de lugares='" + numeroLugares + '\'' +
+                ", número de lugares='" + lugares + '\'' +
                 ", categoria='" + this.categoria.getNome() + '\'' +
                 '}';
     }

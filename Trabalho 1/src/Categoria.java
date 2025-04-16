@@ -1,4 +1,9 @@
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 
 public class Categoria {
     private String nome;
@@ -104,6 +109,65 @@ public class Categoria {
     public void setIdentificador(int identificador) {
         this.identificador = identificador;
     }
+
+
+
+    public static void carregarCategoriasCSV(String caminhoArquivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            boolean primeiraLinha = true;
+
+            while ((linha = br.readLine()) != null) {
+                // Ignora a primeira linha se for cabeçalho
+                if (primeiraLinha) {
+                    primeiraLinha = false;
+                    continue;
+                }
+
+                String[] dados = linha.split(";");
+                if (dados.length != 2) {
+                    System.out.println("Linha inválida: " + linha);
+                    continue;
+                }
+
+                int identificador = Integer.parseInt(dados[0].trim());
+                String nome = dados[1].trim();
+
+                if (listaCategoria.procurarPorId(identificador) == null &&
+                        listaCategoria.procurarPorNome(nome) == null) {
+
+                    Categoria categoria = new Categoria(nome, identificador);
+                    System.out.println("Categoria carregada: " + nome);
+                } else {
+                    System.out.println("Categoria já existente, ignorando: " + nome);
+                }
+            }
+
+            System.out.println("Carregamento de categorias finalizado.");
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+        }
+    }
+
+    public static void salvarCategoriasCSV(String caminhoArquivo) {
+        try (PrintWriter writer = new PrintWriter(caminhoArquivo)) {
+            // Cabeçalho
+            writer.println("identificador;nome");
+
+            // Percorrer a lista de categorias e salvar
+            Noh atual = listaCategoria.getInicio();
+            while (atual != null) {
+                Categoria categoria = (Categoria) atual.getInfo();
+                writer.println(categoria.getIdentificador() + ";" + categoria.getNome());
+                atual = atual.getProx();
+            }
+
+            System.out.println("Categorias salvas com sucesso em: " + caminhoArquivo);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar categorias: " + e.getMessage());
+        }
+    }
+
 
     @Override
     public String toString() {
