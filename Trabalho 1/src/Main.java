@@ -6,20 +6,13 @@ public class Main {
 
         Categoria.carregarCategoriasCSV("src/Data/categorias.csv");
         Veiculos.carregarVeiculosCSV("src/Data/veiculos.csv");
+        Cliente.carregarClientesCSV("clientes.csv");
+
         // Inicializar listas principais do sistema
-
-
-        LDE listaClientes = new LDE();
         ListaLocacoes listaLocacoes = new ListaLocacoes();
 
-
-
-        // Adicionar um cliente de teste para o carregamento de locações funcionar
-        Cliente clienteTeste = new Cliente("João da Silva", "02408925469", "5482156", "(55)3325-2525");
-        listaClientes.insereFim(clienteTeste);
-
         // Carregar dados de arquivos CSV na ordem correta
-        listaLocacoes.carregarLocacoesDeCSV("src/Data/locacoes.csv", listaClientes, Veiculos.listaVeiculos);
+        listaLocacoes.carregarLocacoesDeCSV("src/Data/locacoes.csv", Cliente.listaClientes, Veiculos.listaVeiculos);
 
         // Menu principal do sistema
         int opcao;
@@ -36,7 +29,7 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    MenuCliente.exibirMenu(listaClientes);
+                    MenuCliente.exibirMenu(Cliente.listaClientes);
                     break;
                 case 2:
                     MenuVeiculos.exibirMenu();
@@ -45,7 +38,7 @@ public class Main {
                     MenuCategoria.exibirMenu();
                     break;
                 case 4:
-                    MenuLocacoes.exibirMenu(listaClientes, Veiculos.listaVeiculos, listaLocacoes);
+                    MenuLocacoes.exibirMenu(Cliente.listaClientes, Veiculos.listaVeiculos, listaLocacoes);
                     break;
                 case 0:
                     System.out.println("Encerrando o sistema...");
@@ -57,6 +50,7 @@ public class Main {
         Categoria.salvarCategoriasCSV("src/Data/categorias.csv");
         Veiculos.salvarVeiculosCSV("src/Data/veiculos.csv");
         listaLocacoes.salvarLocacoesCSV("src/Data/locacoes.csv");
+        Cliente.salvarClientesCSV("clientes.csv");
         sc.close();
     }
 }

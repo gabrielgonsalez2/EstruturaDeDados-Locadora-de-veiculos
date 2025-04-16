@@ -8,10 +8,9 @@ public class MenuCliente {
         do {
             System.out.println("\n=========== Menu Cliente ============");
             System.out.println("1 - Cadastrar Cliente");
-            System.out.println("2 - Listar Clientes (início → fim)");
+            System.out.println("2 - Listar Clientes");
             System.out.println("3 - Editar Cliente");
             System.out.println("4 - Remover Cliente");
-            System.out.println("5 - Listar Clientes (fim → início)");
             System.out.println("0 - Voltar");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
@@ -22,16 +21,18 @@ public class MenuCliente {
                     Cliente.cadastrarCliente(listaClientes);
                     break;
                 case 2:
+                System.out.println("Listar do início para o fim? (s/n):");
+                if (sc.nextLine().equalsIgnoreCase("s")) {
                     Cliente.listarClientesInicio(listaClientes);
+                } else {
+                    Cliente.listarClientesFim(listaClientes);
+                }
                     break;
                 case 3:
                     Cliente.editarCliente(listaClientes);
                     break;
                 case 4:
                     Cliente.removerCliente(listaClientes);
-                    break;
-                case 5:
-                    Cliente.listarClientesFim(listaClientes);
                     break;
                 case 0:
                     System.out.println("Voltando...");

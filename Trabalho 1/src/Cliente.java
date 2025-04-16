@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Cliente {
@@ -5,6 +9,8 @@ public class Cliente {
     private String cpf;
     private String cnh;
     private String telefone;
+
+    public static LDE listaClientes = new LDE(); 
 
     public Cliente(String nome, String cpf, String cnh, String telefone) {
         this.nome = nome;
@@ -46,10 +52,10 @@ public class Cliente {
         String cpf = sc.nextLine();
         Cliente cliente = buscarPorCpf(listaClientes, cpf);
 
-        if (cliente == null) {
-            System.out.println("Cliente não encontrado.");
-            return;
-        }
+    if (cliente == null) {
+        System.out.println("Cliente não encontrado.");
+        return;
+    }
 
         System.out.println("Editando cliente: " + cliente.getNome());
         System.out.print("Novo nome (" + cliente.getNome() + "): ");
@@ -72,6 +78,11 @@ public class Cliente {
 
         if (cliente == null) {
             System.out.println("Cliente não encontrado.");
+            return;
+        }
+
+        if (Locacao.listaLocacoes.procurarPorCnh(cliente.getCnh()) != null) {
+            System.out.println("Erro: Cliente possui locação ativa e não pode ser removido.");
             return;
         }
 
@@ -100,14 +111,22 @@ public class Cliente {
     }
 
     public static void listarClientesInicio(LDE listaClientes) {
-        System.out.println("\n====== LISTA DE CLIENTES (Início -> Fim) ======");
+        System.out.println("\n====== LISTA DE CLIENTES (Início ao Fim) ======");
+        if (listaClientes.getInicio() == null) {
+            System.out.println("Nenhum cliente cadastrado.");
+        } else {
         listaClientes.imprimeLista();
+        }
     }
 
     public static void listarClientesFim(LDE listaClientes) {
-        System.out.println("\n====== LISTA DE CLIENTES (Fim -> Início) ======");
+        System.out.println("\n====== LISTA DE CLIENTES (Fim ao Início) ======");
+        if (listaClientes.getInicio() == null) {
+            System.out.println("Nenhum cliente cadastrado.");
+        } else {
         listaClientes.imprimeReverso();
     }
+}
 
     // Getters e Setters
     public String getNome() {
@@ -122,22 +141,76 @@ public class Cliente {
     public String getTelefone() {
          return telefone; 
     }
-    
     public void setNome(String nome) { 
         this.nome = nome;
     }
-    
     public void setCpf(String cpf) { 
         this.cpf = cpf;
     }
-    
     public void setCnh(String cnh) { 
             this.cnh = cnh;
     }
-    
     public void setTelefone(String telefone) { 
             this.telefone = telefone;
     }
+
+public static void carregarClientesCSV(String caminhoArquivo) {
+    try (BufferedReader br = new BufferedReader(new FileReader("clientes.csv"))) {
+        String linha;
+        boolean primeiraLinha = true;
+
+        while ((linha = br.readLine()) != null) {
+            // Ignora a primeira linha se for cabeçalho
+            if (primeiraLinha) {
+                primeiraLinha = false;
+                continue;
+            }
+
+            String[] dados = linha.split(";");
+            if (dados.length != 4) {
+                System.out.println("Linha inválida: " + linha);
+                continue;
+            }
+
+            String nome = dados[0].trim();
+            String cpf = dados[1].trim();
+            String cnh = dados[2].trim();
+            String telefone = dados[3].trim();
+
+            if (buscarPorCpf(listaClientes, cpf) == null) {
+                Cliente cliente = new Cliente(nome, cpf, cnh, telefone);
+                listaClientes.insereFim(cliente);
+                System.out.println("Cliente carregado: " + cpf);
+            } else {
+                System.out.println("Cliente já existente: " + cpf);
+            }
+        }
+
+        System.out.println("Carregamento de clientes finalizado.");
+    } catch (IOException e) {
+        System.out.println("Erro ao ler o arquivo de clientes: " + e.getMessage());
+    }
+}
+    // Método para salvar clientes de um arquivo CSV
+   public static void salvarClientesCSV(String caminhoArquivo) {
+    try (PrintWriter writer = new PrintWriter("clientes.csv")) {
+        writer.println("nome;cpf;cnh;telefone");
+        Noh atual = listaClientes.getInicio();
+        while (atual != null) {
+            Cliente cliente = (Cliente) atual.getInfo();
+            writer.println(
+                    cliente.getNome() + ";" +
+                    cliente.getCpf() + ";" +
+                    cliente.getCnh() + ";" +
+                    cliente.getTelefone()
+            );
+            atual = atual.getProx();
+        }
+        System.out.println("Clientes salvos com sucesso em: " + caminhoArquivo);
+    } catch (IOException e) {
+        System.out.println("Erro ao salvar clientes: " + e.getMessage());
+    }
+}
 
     // Métodos para comparação de objetos
     @Override
