@@ -12,7 +12,7 @@ public class Veiculos {
     private int potencia;
     private int lugares;
     private Categoria categoria;
-    private static LDE listaVeiculos = new LDE();
+    static LDE listaVeiculos = new LDE();
 
     public Veiculos(String placa, String modelo, String marca, int ano, int potencia, int lugares, Categoria categoria) {
         this.placa = placa;

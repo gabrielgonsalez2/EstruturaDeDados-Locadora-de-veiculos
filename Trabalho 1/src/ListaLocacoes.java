@@ -104,7 +104,7 @@ public class ListaLocacoes {
                 if (potenciaMin != null && veiculo.getPotencia() < potenciaMin) {
                     passaFiltro = false;
                 }
-                if (lugares != null && veiculo.getNumeroLugares() != lugares) {
+                if (lugares != null && veiculo.getLugares() != lugares) {
                     passaFiltro = false;
                 }
                 if (idCategoria != null && veiculo.getCategoria().getIdentificador() != idCategoria) {

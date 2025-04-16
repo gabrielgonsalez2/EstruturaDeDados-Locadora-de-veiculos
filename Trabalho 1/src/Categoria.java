@@ -9,7 +9,7 @@ public class Categoria {
     private String nome;
     private int identificador;
     LDE listaVeiculosNaCategoria;
-    private static LDE listaCategoria = new LDE();
+    static LDE listaCategoria = new LDE();
 
     public Categoria(String nome, int identificador) {
         this.nome = nome;
