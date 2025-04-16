@@ -1,3 +1,7 @@
+package Classes;
+
+import Utils.LDE;
+
 public class Locacao {
     private String cnhCliente;
     private String placaVeiculo;

@@ -1,8 +1,14 @@
+package Classes;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import Utils.LDE;
+import Utils.Noh;
+
+
 
 public class Cliente {
     // Atributos do cliente
@@ -187,7 +193,6 @@ public static void carregarClientesCSV(String caminhoArquivo) {
             if (buscarPorCpf(listaClientes, cpf) == null) {
                 Cliente cliente = new Cliente(nome, cpf, cnh, telefone);
                 listaClientes.insereFim(cliente);
-                System.out.println("Cliente carregado: " + cpf);
             } else {
                 System.out.println("Cliente já existente: " + cpf);
             }

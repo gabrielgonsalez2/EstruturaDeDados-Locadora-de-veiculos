@@ -1,4 +1,6 @@
+package Menus;
 import java.util.Scanner;
+import Classes.Categoria;
 
 public class MenuCategoria {
     private static Scanner sc = new Scanner(System.in);

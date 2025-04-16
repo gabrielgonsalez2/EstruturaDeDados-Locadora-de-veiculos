@@ -1,4 +1,8 @@
+package Menus;
+
 import java.util.Scanner;
+import Utils.LDE;
+import Classes.Cliente;
 
 public class MenuCliente {
     private static Scanner sc = new Scanner(System.in);

@@ -1,4 +1,7 @@
+package Menus;
+
 import java.util.Scanner;
+import Classes.Veiculos;
 
 public class MenuVeiculos {
     private static Scanner sc = new Scanner(System.in);

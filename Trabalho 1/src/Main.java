@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+import Classes.Categoria;
+import Classes.Cliente;
+import Classes.ListaLocacoes;
+import Classes.Veiculos;
+import Menus.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -8,10 +14,10 @@ public class Main {
         ListaLocacoes listaLocacoes = new ListaLocacoes();
 
         // Carregar dados de arquivos CSV na ordem correta
-        Categoria.carregarCategoriasCSV("Trabalho 1/src/Data/Categorias.csv");
-        Veiculos.carregarVeiculosCSV("Trabalho 1/src/Data/veiculos.csv");
-        Cliente.carregarClientesCSV("Trabalho 1/src/Data/clientes.csv");
-        listaLocacoes.carregarLocacoesDeCSV("Trabalho 1/src/Data/locacoes.csv", Cliente.listaClientes, Veiculos.listaVeiculos);
+        Categoria.carregarCategoriasCSV("src/Data/Categorias.csv");
+        Veiculos.carregarVeiculosCSV("src/Data/veiculos.csv");
+        Cliente.carregarClientesCSV("src/Data/clientes.csv");
+        listaLocacoes.carregarLocacoesDeCSV("src/Data/locacoes.csv", Cliente.listaClientes, Veiculos.listaVeiculos);
 
         // Menu principal do sistema
         int opcao;
@@ -47,10 +53,10 @@ public class Main {
             }
         } while (opcao != 0);
         //  Salva os dados nos arquivos CSV
-        Categoria.salvarCategoriasCSV("Trabalho 1/src/Data/categorias.csv");
-        Veiculos.salvarVeiculosCSV("Trabalho 1/src/Data/veiculos.csv");
-        listaLocacoes.salvarLocacoesCSV("Trabalho 1/src/Data/locacoes.csv");
-        Cliente.salvarClientesCSV("Trabalho 1/src/Data/clientes.csv");
+        Categoria.salvarCategoriasCSV("src/Data/categorias.csv");
+        Veiculos.salvarVeiculosCSV("src/Data/veiculos.csv");
+        listaLocacoes.salvarLocacoesCSV("src/Data/locacoes.csv");
+        Cliente.salvarClientesCSV("src/Data/clientes.csv");
         sc.close();
     }
 }

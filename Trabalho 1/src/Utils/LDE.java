@@ -1,3 +1,7 @@
+package Utils;
+
+import Classes.*;
+
 public class LDE{
     private Noh inicio;
     private Noh ultimo;

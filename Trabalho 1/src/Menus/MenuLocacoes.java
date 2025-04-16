@@ -1,5 +1,7 @@
-// Classe MenuLocacoes
+package Menus;// Classe MenuLocacoes
 import java.util.Scanner;
+import Utils.LDE;
+import Classes.ListaLocacoes;
 
 public class MenuLocacoes {
     private static Scanner scanner = new Scanner(System.in);

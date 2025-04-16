@@ -1,8 +1,12 @@
+package Classes;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import Utils.LDE;
+import Utils.Noh;
 
 public class Veiculos {
     private String placa;
@@ -13,7 +17,7 @@ public class Veiculos {
     private int lugares;
     private Categoria categoria;
     // Esta lista guarda todas os veiculos criados
-    static LDE listaVeiculos = new LDE();
+    public static LDE listaVeiculos = new LDE();
 
     public Veiculos(String placa, String modelo, String marca, int ano, int potencia, int lugares, Categoria categoria) {
         this.placa = placa;

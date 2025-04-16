@@ -1,8 +1,13 @@
+package Classes;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import Classes.Categoria;
+import Utils.LDE;
+import Utils.Noh;
 
 public class Categoria {
     private String nome;
@@ -101,7 +106,16 @@ public class Categoria {
     }
 
     public static void listarCategoria() {
-        listaCategoria.imprimeLista();
+        System.out.print("Listar do início para o fim? (s/n): ");
+        Scanner scanner = new Scanner(System.in);
+        String escolha = scanner.nextLine();
+        if (escolha.equals("s")) {
+            System.out.println("Exibindo do início para o fim:");
+            listaCategoria.imprimeLista();
+        } else if (escolha.equals("n")) {
+            System.out.println("Exibindo do fim para o início:");
+            listaCategoria.imprimeReverso();
+        }
     }
 
     public String getNome() {

@@ -1,8 +1,12 @@
+package Classes;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import Utils.LDE;
+import Utils.Noh;
 
 public class ListaLocacoes {
     private LDE locacoes;
