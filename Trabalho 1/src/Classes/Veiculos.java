@@ -54,7 +54,7 @@ public class Veiculos {
             System.out.print("Digite o número de lugares: ");
             int numeroLugares = Integer.parseInt(scanner.nextLine());
 
-            Categoria.listarCategoria();
+            Categoria.listaCategoria.imprimeLista();
             System.out.print("Digite o id da categoria: ");
             int identificadorCategoria = Integer.parseInt(scanner.nextLine());
 
@@ -111,7 +111,7 @@ public class Veiculos {
         System.out.print("Digite o novo número de lugares: ");
         veiculo.lugares = Integer.parseInt(scanner.nextLine());
 
-        Categoria.listarCategoria();
+        Categoria.listaCategoria.imprimeLista();
         System.out.print("Digite o nome da categoria: ");
         int identificadorCategoria = Integer.parseInt(scanner.nextLine());
 
@@ -141,7 +141,6 @@ public class Veiculos {
             return;
         }
 
-        listaVeiculos.imprimeLista();
         System.out.println("Certeza que deseja excluir? (s/n)");
         String escolha = scanner.nextLine();
         if (escolha.equals("s")) {
