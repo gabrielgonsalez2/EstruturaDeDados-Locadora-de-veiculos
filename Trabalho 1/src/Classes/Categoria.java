@@ -48,18 +48,18 @@ public class Categoria {
                 Categoria categoria = new Categoria(nome, identificador);
                 System.out.println("Categoria incluida com sucesso!");
             } else {
-                System.out.println("Esta categoria já existe");
+                System.out.println("Já existe uma categoria com este identificador.");
             }
         } else {
-            System.out.println("Já existe uma categoria com este identificador");
+            System.out.println("Já existe uma categoria com este nome.");
         }
     }
 
     public static void editarCategoria() {
         Scanner scanner = new Scanner(System.in);
-        listarCategoria();
+        listaCategoria.imprimeLista();
 
-        System.out.print("Digite o id da categoria que deseja editar: ");
+        System.out.print("Digite o identificador da categoria que deseja editar: ");
         int id = Integer.parseInt(scanner.nextLine());
         Categoria categoria = listaCategoria.procurarPorId(id);
 
@@ -69,17 +69,28 @@ public class Categoria {
         }
 
         System.out.print("Digite o novo nome da categoria: ");
-        categoria.nome = scanner.nextLine();
+        String novoNome = scanner.nextLine();
 
-        System.out.print("Digite o novo identificador da categoria: ");
-        categoria.identificador = scanner.nextInt();
+        if (listaCategoria.procurarPorNome(novoNome) == null) {
+            categoria.nome = novoNome;
 
-        System.out.println("Categoria atualizada com sucesso!");
+            System.out.print("Digite o identificador da categoria: ");
+            int novoIdentificador = scanner.nextInt();
+
+            if (listaCategoria.procurarPorId(novoIdentificador) == null) {
+                categoria.identificador = novoIdentificador;
+                System.out.println("Categoria atualizada com sucesso!");
+            } else {
+                System.out.println("Já existe uma categoria com este identificador.");
+            }
+        } else {
+            System.out.println("Já existe uma categoria com este nome.");
+        }
     }
 
     public static void excluirCategoria() {
         Scanner scanner = new Scanner(System.in);
-        listarCategoria();
+        listaCategoria.imprimeLista();
 
         System.out.print("Digite o id da categoria que deseja excluir: ");
         int id = Integer.parseInt(scanner.nextLine());

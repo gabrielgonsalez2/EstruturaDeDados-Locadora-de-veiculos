@@ -136,6 +136,7 @@ public class Veiculos {
             return;
         }
 
+        // Verifica se o veiculo esta alocado, se estiver ele não pode ser removido.
         if (Locacao.listaLocacoes.procurarPorPlacaLocacao(placa) != null) {
             System.out.println("Veículo esta alocado.");
             return;
