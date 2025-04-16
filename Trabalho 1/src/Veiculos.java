@@ -12,8 +12,8 @@ public class Veiculos {
     private int potencia;
     private int lugares;
     private Categoria categoria;
+    // Esta lista guarda todas os veiculos criados
     static LDE listaVeiculos = new LDE();
-
 
     public Veiculos(String placa, String modelo, String marca, int ano, int potencia, int lugares, Categoria categoria) {
         this.placa = placa;
@@ -26,7 +26,6 @@ public class Veiculos {
         //adiciona o veiculo recem criado na lista da categoria
         this.categoria.listaVeiculosNaCategoria.insereFim(this);
         listaVeiculos.insereFim(this);
-
     }
 
     public static void incluirVeiculo() {
@@ -36,7 +35,6 @@ public class Veiculos {
         String placa = scanner.nextLine();
 
         if (listaVeiculos.procurarPorPlaca(placa) == null) {
-
             System.out.print("Digite o modelo: ");
             String modelo = scanner.nextLine();
 
@@ -64,14 +62,15 @@ public class Veiculos {
 
             Veiculos veiculo = new Veiculos(placa, modelo, marca, ano, potencia, numeroLugares, categoria);
             System.out.println("Veículo adicionado com sucesso!");
-        } else{
+        } else {
             System.out.println("Ja existe um veiculo com este placa.");
         }
     }
 
-    public static void editarVeiculo(){
+    public static void editarVeiculo() {
         Scanner scanner = new Scanner(System.in);
-        listarVeiculos();
+        listaVeiculos.imprimeLista();
+
         System.out.print("Digite a placa do veiculo que deseja editar: ");
         String placa = scanner.nextLine();
 
@@ -80,6 +79,7 @@ public class Veiculos {
             System.out.println("Veículo não encontrado.");
             return;
         }
+
         System.out.println(veiculo);
 
         System.out.print("Digite a nova placa: ");
@@ -107,17 +107,15 @@ public class Veiculos {
         Categoria categoria = Categoria.procurarCategoria(identificadorCategoria);
         if (categoria == null) {
             System.out.println("Categoria não encontrada.");
-        } else{
+        } else {
             veiculo.categoria = categoria;
         }
-
-
     }
 
-    public static void excluirVeiculo(){
+    public static void excluirVeiculo() {
         Scanner scanner = new Scanner(System.in);
+        listaVeiculos.imprimeLista();
 
-        listarVeiculos();
         System.out.print("Digite a placa do veiculo que deseja excluir: ");
         String placa = scanner.nextLine();
 
@@ -127,7 +125,7 @@ public class Veiculos {
             return;
         }
 
-        if (Locacao.listaLocacoes.procurarPorPlacaLocacao(placa) != null){
+        if (Locacao.listaLocacoes.procurarPorPlacaLocacao(placa) != null) {
             System.out.println("Veículo esta alocado.");
             return;
         }
@@ -141,10 +139,18 @@ public class Veiculos {
         }
     }
 
-    public static void listarVeiculos(){
-        listaVeiculos.imprimeLista();
+    public static void listarVeiculos() {
+        System.out.print("Listar do início para o fim? (s/n): ");
+        Scanner scanner = new Scanner(System.in);
+        String escolha = scanner.nextLine();
+        if (escolha.equals("s")) {
+            System.out.println("Exibindo do início para o fim:");
+            listaVeiculos.imprimeLista();
+        } else if (escolha.equals("n")) {
+            System.out.println("Exibindo do fim para o início:");
+            listaVeiculos.imprimeReverso();
+        }
     }
-
 
     public String getPlaca() {
         return placa;
@@ -193,7 +199,7 @@ public class Veiculos {
                     primeiraLinha = false;
                     continue;
                 }
-//placa;modelo;marca;ano;potencia;lugares;categoria
+
                 String[] dados = linha.split(";");
                 if (dados.length != 7) {
                     System.out.println("Linha inválida: " + linha);
@@ -208,9 +214,7 @@ public class Veiculos {
                 int lugares = Integer.parseInt(dados[5].trim());
                 Categoria categoria = Categoria.procurarCategoria(Integer.parseInt(dados[6].trim()));
 
-
                 if (listaVeiculos.procurarPorPlaca(placa) == null) {
-
                     Veiculos veiculo = new Veiculos(placa, modelo, marca, ano, potencia, lugares, categoria);
                     System.out.println("Veiculo carregado: " + placa);
                 } else {
@@ -233,7 +237,15 @@ public class Veiculos {
             Noh atual = listaVeiculos.getInicio();
             while (atual != null) {
                 Veiculos veiculo = (Veiculos) atual.getInfo();
-                writer.println(veiculo.getPlaca() + ";" + veiculo.getModelo() + ";" + veiculo.getMarca() + ";" + veiculo.getAno()+ ";" + veiculo.getPotencia()+ ";" + veiculo.getLugares() + ";" + veiculo.categoria.getIdentificador());
+                writer.println(
+                        veiculo.getPlaca() + ";" +
+                                veiculo.getModelo() + ";" +
+                                veiculo.getMarca() + ";" +
+                                veiculo.getAno() + ";" +
+                                veiculo.getPotencia() + ";" +
+                                veiculo.getLugares() + ";" +
+                                veiculo.categoria.getIdentificador()
+                );
                 atual = atual.getProx();
             }
 

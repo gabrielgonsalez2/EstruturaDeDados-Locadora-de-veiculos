@@ -4,51 +4,54 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-
 public class Categoria {
     private String nome;
     private int identificador;
+    // Esta lista guarda os veiculos que forem associados a ela
     LDE listaVeiculosNaCategoria;
+    // Esta lista guarda todas as categorias criadas
     static LDE listaCategoria = new LDE();
 
     public Categoria(String nome, int identificador) {
         this.nome = nome;
         this.identificador = identificador;
         this.listaVeiculosNaCategoria = new LDE();
+        // Logo após a criação da cateegoria ela ja é adicionada a lista de categorias
         listaCategoria.insereFim(this);
-
     }
 
-    //Lista os veiculos vinculados a categoria
-    public void listarVeiculos(){
+    // Lista os veiculos vinculados a categoria
+    public void listarVeiculos() {
         this.listaVeiculosNaCategoria.imprimeLista();
     }
 
-    public static Categoria procurarCategoria(int id){
-        return (Categoria) listaCategoria.procurarPorId(id);
+    // Este metodo serve para evitar uso direto de listaCategoria
+    public static Categoria procurarCategoria(int id) {
+        return listaCategoria.procurarPorId(id);
     }
 
-    public static void incluirCategoria(){
+    public static void incluirCategoria() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Digite o nome da categoria: ");
         String nome = scanner.nextLine();
-        if (listaCategoria.procurarPorNome(nome) == null){
+
+        if (listaCategoria.procurarPorNome(nome) == null) {
             System.out.print("Digite o identificador da categoria: ");
             int identificador = scanner.nextInt();
+
             if (listaCategoria.procurarPorId(identificador) == null) {
                 Categoria categoria = new Categoria(nome, identificador);
-
                 System.out.println("Categoria incluida com sucesso!");
-            } else{
+            } else {
                 System.out.println("Esta categoria já existe");
             }
-        } else{
+        } else {
             System.out.println("Já existe uma categoria com este identificador");
         }
     }
 
-    public static void editarCategoria(){
+    public static void editarCategoria() {
         Scanner scanner = new Scanner(System.in);
         listarCategoria();
 
@@ -63,20 +66,19 @@ public class Categoria {
 
         System.out.print("Digite o novo nome da categoria: ");
         categoria.nome = scanner.nextLine();
+
         System.out.print("Digite o novo identificador da categoria: ");
         categoria.identificador = scanner.nextInt();
 
         System.out.println("Categoria atualizada com sucesso!");
-
     }
 
-    public static void excluirCategoria(){
+    public static void excluirCategoria() {
         Scanner scanner = new Scanner(System.in);
-
         listarCategoria();
+
         System.out.print("Digite o id da categoria que deseja excluir: ");
         int id = Integer.parseInt(scanner.nextLine());
-
         Categoria categoria = listaCategoria.procurarPorId(id);
 
         if (categoria == null) {
@@ -85,37 +87,38 @@ public class Categoria {
         }
 
         if (categoria.listaVeiculosNaCategoria != null) {
-            System.out.println("Esta categoria possui veiculos vinculados nela.");
+            System.out.println("Esta categoria possui veiculos vinculados a ela.");
             return;
         }
 
         System.out.println("Certeza que deseja excluir? (s/n)");
         String escolha = scanner.nextLine();
+
         if (escolha.equals("s")) {
             System.out.println(categoria.getNome() + "foi excluido com sucesso!");
             listaCategoria.remove(categoria);
         }
     }
 
-
-    public static void listarCategoria(){
+    public static void listarCategoria() {
         listaCategoria.imprimeLista();
     }
 
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public int getIdentificador() {
         return identificador;
     }
+
     public void setIdentificador(int identificador) {
         this.identificador = identificador;
     }
-
-
 
     public static void carregarCategoriasCSV(String caminhoArquivo) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
@@ -173,33 +176,30 @@ public class Categoria {
         }
     }
 
-
     @Override
     public String toString() {
         return "Categoria{" +
                 "nome= '" + nome + '\'' +
-                ", identificador= '" + identificador+ '\'' +
+                ", identificador= '" + identificador + '\'' +
                 '}';
     }
 
     @Override
     public boolean equals(Object outro) {
-        //qualquer coisa é diferente de NULL
-        if (outro == null) {
-            return false;
-        }
-        //propriedade REFLEXIVA
-        if (this == outro) {
-            return true;
-        }
-        //objetos de classes diferentes nunca são iguais
-        if (this.getClass() != outro.getClass()) {
-            return false;
-        }
-        //conversão explícita para acessar os atributos do outro
+        // qualquer coisa é diferente de NULL
+        if (outro == null) return false;
+
+        // propriedade REFLEXIVA
+        if (this == outro) return true;
+
+        // objetos de classes diferentes nunca são iguais
+        if (this.getClass() != outro.getClass()) return false;
+
+        // conversão explícita para acessar os atributos do outro
         Categoria outraCategoria = (Categoria) outro;
-        //verifica se todos os atributos são iguais
-        return this.nome.equals(outraCategoria.nome)
-                && this.identificador == outraCategoria.identificador;
+
+        // verifica se todos os atributos são iguais
+        return this.nome.equals(outraCategoria.nome) &&
+                this.identificador == outraCategoria.identificador;
     }
 }

@@ -6,7 +6,7 @@ public class MenuCategoria {
     public static void exibirMenu() {
         int opcao;
         do {
-            System.out.println("\n=========== Menu Cliente ============");
+            System.out.println("\n=========== Menu Categoria ============");
             System.out.println("1 - Cadastrar Categoria");
             System.out.println("2 - Listar Categorias");
             System.out.println("3 - Editar Categoria");
