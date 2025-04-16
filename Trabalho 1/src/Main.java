@@ -6,7 +6,7 @@ public class Main {
 
         Categoria.carregarCategoriasCSV("src/Data/categorias.csv");
         Veiculos.carregarVeiculosCSV("src/Data/veiculos.csv");
-        Cliente.carregarClientesCSV("clientes.csv");
+        Cliente.carregarClientesCSV("src/Data/clientes.csv");
 
         // Inicializar listas principais do sistema
         ListaLocacoes listaLocacoes = new ListaLocacoes();
@@ -50,7 +50,7 @@ public class Main {
         Categoria.salvarCategoriasCSV("src/Data/categorias.csv");
         Veiculos.salvarVeiculosCSV("src/Data/veiculos.csv");
         listaLocacoes.salvarLocacoesCSV("src/Data/locacoes.csv");
-        Cliente.salvarClientesCSV("clientes.csv");
+        Cliente.salvarClientesCSV("src/Data/clientes.csv");
         sc.close();
     }
 }
