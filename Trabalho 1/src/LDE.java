@@ -1,4 +1,3 @@
-
 public class LDE{
     private Noh inicio;
     private Noh ultimo;
@@ -120,7 +119,6 @@ public class LDE{
         return null;
     }
 
-
     public void imprimeLista(){
         Noh novo = inicio;
         while (novo != null) {
@@ -143,6 +141,22 @@ public class LDE{
         }
         return null;
     }
+
+    public Locacao procurarPorPlacaLocacao(String placa) {
+        Noh atual = inicio;
+        while (atual != null) {
+            Object obj = atual.getInfo();
+            if (obj instanceof Locacao) {
+                Locacao locacao = (Locacao) obj;
+                if (locacao.getPlacaVeiculo().equals(placa)) {
+                    return locacao;
+                }
+            }
+            atual = atual.getProx();
+        }
+        return null;
+    }
+
     public void imprimeReverso() {
         Noh p = ultimo;
         while (p != null) {

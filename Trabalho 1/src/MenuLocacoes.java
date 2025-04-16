@@ -1,10 +1,10 @@
+// Classe MenuLocacoes
 import java.util.Scanner;
 
 public class MenuLocacoes {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void exibirMenu(LDE listaClientes, LDE listaVeiculos) {
-        ListaLocacoes listaLocacoes = new ListaLocacoes();
+    public static void exibirMenu(LDE listaClientes, LDE listaVeiculos, ListaLocacoes listaLocacoes) {
         int opcao;
 
         do {

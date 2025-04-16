@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ListaLocacoes {
@@ -13,7 +16,6 @@ public class ListaLocacoes {
         System.out.print("Digite a CNH do cliente: ");
         String cnh = scanner.nextLine();
         
-        // Assumindo que LDE terá procurarPorCnh implementado
         Cliente cliente = listaClientes.procurarPorCnh(cnh);
         if (cliente == null) {
             System.out.println("Cliente não encontrado!");
@@ -30,6 +32,7 @@ public class ListaLocacoes {
             return;
         }
         
+        // Verifica se o veículo já está locado
         if (procurarPorPlaca(placa) != null) {
             System.out.println("Veículo já locado!");
             return;
@@ -42,7 +45,17 @@ public class ListaLocacoes {
         String dataDevolucao = scanner.nextLine();
         
         System.out.print("Digite o valor da locação: ");
-        double valor = Double.parseDouble(scanner.nextLine());
+        double valor;
+        try {
+            valor = Double.parseDouble(scanner.nextLine());
+            if (valor < 0) {
+                System.out.println("Valor não pode ser negativo!");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Valor inválido! Use um número (ex.: 150.50).");
+            return;
+        }
         
         Locacao locacao = new Locacao(cnh, placa, dataRetirada, dataDevolucao, valor);
         locacoes.insereFim(locacao);
@@ -70,9 +83,12 @@ public class ListaLocacoes {
             System.out.println("Nenhuma locação ativa.");
             return;
         }
+        System.out.println("\n===== Locações Ativas =====");
         if (inicioParaFim) {
+            System.out.println("Exibindo do início para o fim:");
             locacoes.imprimeLista();
         } else {
+            System.out.println("Exibindo do fim para o início:");
             locacoes.imprimeReverso();
         }
     }
@@ -106,9 +122,8 @@ public class ListaLocacoes {
             return;
         }
         
-        // Ordenação por potência
+        System.out.println("\n===== Veículos Disponíveis =====");
         ordenarPorPotencia(disponiveis, ordemCrescente);
-        
         disponiveis.imprimeLista();
     }
 
@@ -127,7 +142,6 @@ public class ListaLocacoes {
                 
                 if ((crescente && v1.getPotencia() > v2.getPotencia()) ||
                     (!crescente && v1.getPotencia() < v2.getPotencia())) {
-                    // Trocar informações
                     Object temp = atual.getInfo();
                     atual.setInfo(atual.getProx().getInfo());
                     atual.getProx().setInfo(temp);
@@ -139,20 +153,38 @@ public class ListaLocacoes {
     }
 
     private Locacao procurarPorPlaca(String placa) {
-        Noh atual = locacoes.getInicio();
-        while (atual != null) {
-            Locacao locacao = (Locacao) atual.getInfo();
-            if (locacao.getPlacaVeiculo().equals(placa)) {
-                return locacao;
-            }
-            atual = atual.getProx();
-        }
-        return null;
+        return locacoes.procurarPorPlacaLocacao(placa);
     }
 
-    // Getter necessário para acessar locações em outras classes (ex.: exclusão de cliente/veículo)
+    public void carregarLocacoesDeCSV(String caminhoArquivo, LDE listaClientes, LDE listaVeiculos) {
+        try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(",");
+                if (dados.length != 5) continue;
+
+                String cnh = dados[0];
+                String placa = dados[1];
+                String dataRetirada = dados[2];
+                String dataDevolucao = dados[3];
+                double valor = Double.parseDouble(dados[4]);
+
+                Cliente cliente = listaClientes.procurarPorCnh(cnh);
+                Veiculos veiculo = listaVeiculos.procurarPorPlaca(placa);
+                if (cliente != null && veiculo != null && procurarPorPlaca(placa) == null) {
+                    Locacao locacao = new Locacao(cnh, placa, dataRetirada, dataDevolucao, valor);
+                    locacoes.insereFim(locacao);
+                }
+            }
+            System.out.println("Locações carregadas do arquivo CSV com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar locações do arquivo CSV: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Erro no formato do valor no arquivo CSV: " + e.getMessage());
+        }
+    }
+
     public LDE getLocacoes() {
         return locacoes;
     }
 }
-

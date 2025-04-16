@@ -43,4 +43,12 @@ public class Locacao {
                 ", valor=" + valor +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object outro) {
+        if (outro == null || getClass() != outro.getClass()) return false;
+        if (this == outro) return true;
+        Locacao outraLocacao = (Locacao) outro;
+        return this.placaVeiculo.equals(outraLocacao.placaVeiculo);
+    }
 }
