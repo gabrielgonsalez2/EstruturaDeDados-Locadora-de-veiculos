@@ -216,13 +216,12 @@ public class Veiculos {
 
                 if (listaVeiculos.procurarPorPlaca(placa) == null) {
                     Veiculos veiculo = new Veiculos(placa, modelo, marca, ano, potencia, lugares, categoria);
-                    System.out.println("Veiculo carregado: " + placa);
                 } else {
                     System.out.println("Veiculo já existente: " + placa);
                 }
             }
 
-            System.out.println("Carregamento de categorias finalizado.");
+            System.out.println("Carregamento de veiculos finalizado.");
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo: " + e.getMessage());
         }

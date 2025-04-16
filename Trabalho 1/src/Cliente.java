@@ -81,7 +81,7 @@ public class Cliente {
             return;
         }
 
-        if (Locacao.listaLocacoes.procurarPorCnh(cliente.getCnh()) != null) {
+        if (Locacao.listaLocacoes.procurarPorCnhLocacao(cliente.cnh) != null) {
             System.out.println("Erro: Cliente possui locação ativa e não pode ser removido.");
             return;
         }
@@ -155,7 +155,7 @@ public class Cliente {
     }
 
 public static void carregarClientesCSV(String caminhoArquivo) {
-    try (BufferedReader br = new BufferedReader(new FileReader("clientes.csv"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
         String linha;
         boolean primeiraLinha = true;
 

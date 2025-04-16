@@ -157,6 +157,21 @@ public class LDE{
         return null;
     }
 
+    public Locacao procurarPorCnhLocacao(String cnh) {
+        Noh atual = inicio;
+        while (atual != null) {
+            Object obj = atual.getInfo();
+            if (obj instanceof Locacao) {
+                Locacao locacao = (Locacao) obj;
+                if (locacao.getCnhCliente().equals(cnh)) {
+                    return locacao;
+                }
+            }
+            atual = atual.getProx();
+        }
+        return null;
+    }
+
     public void imprimeReverso() {
         Noh p = ultimo;
         while (p != null) {

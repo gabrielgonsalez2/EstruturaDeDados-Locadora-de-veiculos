@@ -145,7 +145,6 @@ public class Categoria {
                         listaCategoria.procurarPorNome(nome) == null) {
 
                     Categoria categoria = new Categoria(nome, identificador);
-                    System.out.println("Categoria carregada: " + nome);
                 } else {
                     System.out.println("Categoria já existente, ignorando: " + nome);
                 }

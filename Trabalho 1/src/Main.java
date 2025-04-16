@@ -4,14 +4,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Categoria.carregarCategoriasCSV("src/Data/categorias.csv");
-        Veiculos.carregarVeiculosCSV("src/Data/veiculos.csv");
-        Cliente.carregarClientesCSV("src/Data/clientes.csv");
-
         // Inicializar listas principais do sistema
         ListaLocacoes listaLocacoes = new ListaLocacoes();
 
         // Carregar dados de arquivos CSV na ordem correta
+        Categoria.carregarCategoriasCSV("src/Data/Categorias.csv");
+        Veiculos.carregarVeiculosCSV("src/Data/veiculos.csv");
+        Cliente.carregarClientesCSV("src/Data/clientes.csv");
         listaLocacoes.carregarLocacoesDeCSV("src/Data/locacoes.csv", Cliente.listaClientes, Veiculos.listaVeiculos);
 
         // Menu principal do sistema
@@ -47,6 +46,7 @@ public class Main {
                     System.out.println("Opção inválida.");
             }
         } while (opcao != 0);
+        //  Salva os dados nos arquivos CSV
         Categoria.salvarCategoriasCSV("src/Data/categorias.csv");
         Veiculos.salvarVeiculosCSV("src/Data/veiculos.csv");
         listaLocacoes.salvarLocacoesCSV("src/Data/locacoes.csv");
