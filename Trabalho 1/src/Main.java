@@ -19,7 +19,7 @@ public class Main {
         listaClientes.insereFim(clienteTeste);
 
         // Carregar dados de arquivos CSV na ordem correta
-        listaLocacoes.carregarLocacoesDeCSV("Trabalho 1/locacoes.csv", listaClientes, Veiculos.listaVeiculos);
+        listaLocacoes.carregarLocacoesDeCSV("src/Data/locacoes.csv", listaClientes, Veiculos.listaVeiculos);
 
         // Menu principal do sistema
         int opcao;
@@ -56,6 +56,7 @@ public class Main {
         } while (opcao != 0);
         Categoria.salvarCategoriasCSV("src/Data/categorias.csv");
         Veiculos.salvarVeiculosCSV("src/Data/veiculos.csv");
+        listaLocacoes.salvarLocacoesCSV("src/Data/locacoes.csv");
         sc.close();
     }
 }

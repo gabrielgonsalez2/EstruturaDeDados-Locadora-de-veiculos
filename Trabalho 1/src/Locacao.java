@@ -4,6 +4,7 @@ public class Locacao {
     private String dataRetirada;
     private String dataDevolucao;
     private double valor;
+    static LDE listaLocacoes = new LDE();
 
     public Locacao(String cnhCliente, String placaVeiculo, String dataRetirada, String dataDevolucao, double valor) {
         this.cnhCliente = cnhCliente;
@@ -11,6 +12,7 @@ public class Locacao {
         this.dataRetirada = dataRetirada;
         this.dataDevolucao = dataDevolucao;
         this.valor = valor;
+        listaLocacoes.insereFim(this);
     }
 
     public String getCnhCliente() {

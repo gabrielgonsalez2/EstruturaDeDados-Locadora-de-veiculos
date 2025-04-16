@@ -14,6 +14,7 @@ public class Veiculos {
     private Categoria categoria;
     static LDE listaVeiculos = new LDE();
 
+
     public Veiculos(String placa, String modelo, String marca, int ano, int potencia, int lugares, Categoria categoria) {
         this.placa = placa;
         this.modelo = modelo;
@@ -25,6 +26,7 @@ public class Veiculos {
         //adiciona o veiculo recem criado na lista da categoria
         this.categoria.listaVeiculosNaCategoria.insereFim(this);
         listaVeiculos.insereFim(this);
+
     }
 
     public static void incluirVeiculo() {
@@ -122,6 +124,11 @@ public class Veiculos {
         Veiculos veiculo = listaVeiculos.procurarPorPlaca(placa);
         if (veiculo == null) {
             System.out.println("Veículo não encontrado.");
+            return;
+        }
+
+        if (Locacao.listaLocacoes.procurarPorPlacaLocacao(placa) != null){
+            System.out.println("Veículo esta alocado.");
             return;
         }
 

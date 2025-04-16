@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class ListaLocacoes {
@@ -159,8 +160,13 @@ public class ListaLocacoes {
     public void carregarLocacoesDeCSV(String caminhoArquivo, LDE listaClientes, LDE listaVeiculos) {
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
+            boolean primeiraLinha = true;
             while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(",");
+                if (primeiraLinha) {
+                    primeiraLinha = false;
+                    continue; // pula o cabeçalho
+                }
+                String[] dados = linha.split(";");
                 if (dados.length != 5) continue;
 
                 String cnh = dados[0];
@@ -183,6 +189,32 @@ public class ListaLocacoes {
             System.out.println("Erro no formato do valor no arquivo CSV: " + e.getMessage());
         }
     }
+
+    public void salvarLocacoesCSV(String caminhoArquivo) {
+        try (PrintWriter writer = new PrintWriter(caminhoArquivo)) {
+            // Cabeçalho
+            writer.println("cnh;placa;dataRetirada;dataDevolucao;valor");
+
+            // Percorrer a lista de locações e salvar
+            Noh atual = locacoes.getInicio();
+            while (atual != null) {
+                Locacao locacao = (Locacao) atual.getInfo();
+                writer.println(
+                        locacao.getCnhCliente() + ";" +
+                                locacao.getPlacaVeiculo() + ";" +
+                                locacao.getDataRetirada() + ";" +
+                                locacao.getDataDevolucao() + ";" +
+                                locacao.getValor()
+                );
+                atual = atual.getProx();
+            }
+
+            System.out.println("Locações salvas com sucesso em: " + caminhoArquivo);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar locações: " + e.getMessage());
+        }
+    }
+
 
     public LDE getLocacoes() {
         return locacoes;

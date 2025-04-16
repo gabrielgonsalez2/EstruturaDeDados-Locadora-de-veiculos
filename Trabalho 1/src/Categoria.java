@@ -84,6 +84,11 @@ public class Categoria {
             return;
         }
 
+        if (categoria.listaVeiculosNaCategoria != null) {
+            System.out.println("Esta categoria possui veiculos vinculados nela.");
+            return;
+        }
+
         System.out.println("Certeza que deseja excluir? (s/n)");
         String escolha = scanner.nextLine();
         if (escolha.equals("s")) {
